@@ -2,7 +2,7 @@
 
 //alert("hola");
 
-import filesystem from 'fs'
+import fileSystem from 'fs'
 
 
 //Esta funcion me permite crear archivos de forma sincronica
@@ -48,3 +48,16 @@ Leer el primer numero y guardar en una variable
 Leer el segundo numero y guardar en una variable
 Crear resultado.txt (pogramaticamente) donde guardamos el resultado de suma de ambos numeros
 */
+
+import fs from "fs"
+
+async function sumaDesdeTxt(archivo1, archivo2) {
+    const contenido1 = await fs.promises.readFile(archivo1, "utf-8");
+    const contenido2 = await fs.promises.readFile(archivo2, "utf-8");
+    const numero1 = Number(contenido1);
+    const numero2 = Number(contenido2);
+
+    const suma = numero1 + numero2;
+    await fs.promises.writeFile("suma.txt", String(suma));
+}
+sumaDesdeTxt("numero_1.txt", "numero_2.txt")
